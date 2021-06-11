@@ -18,14 +18,17 @@ queue<int> replacementQ;
 
 
 int Candidate() {
-    return replacementQ.pop();
+    int candidate = replacementQ.front();
+    replacementQ.pop();
+    return candidate;
 }
 
 void Pin(int n){
     int front;
     queue<int> newQ;
     while(!replacementQ.empty()){
-        front = replacementQ.pop();
+        front = replacementQ.front();
+        replacementQ.pop();
         if(front != (n-1)){
             newQ.push(front);
         }
