@@ -51,8 +51,8 @@ int main(){
         ifile >> action;
         if(action == 'R'){
             candidate = Candidate();
-            ofile << toBeReplaced << " ";
-            pinCount[toBeReplaced] = 1;
+            ofile << candidate << " ";
+            pinCount[candidate] = 1;
         } else if(action == 'U'){
             ifile >> bufferNum;
             Unpin(bufferNum);
