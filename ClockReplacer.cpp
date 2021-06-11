@@ -21,7 +21,9 @@ int Candidate() {
     while(pinCount[current] > 0){
         current = ++current % nFrames;
     }
-    return current+1;
+    int candidate = current+1;
+    current = ++current % nFrames;
+    return candidate;
 }
 
 void Pin(int n){
