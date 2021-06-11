@@ -20,7 +20,7 @@ queue<int> replacementQ;
 int Candidate() {
     int candidate = replacementQ.front();
     replacementQ.pop();
-    return candidate;
+    return candidate+1;
 }
 
 void Pin(int n){
@@ -62,7 +62,7 @@ int main(){
         ifile >> action;
         if(action == 'R'){
             toBeReplaced = Candidate();
-            ofile << toBeReplaced;
+            ofile << toBeReplaced << " ";
             pinCount[toBeReplaced] = 1;
         } else if(action == 'U'){
             ifile >> bufferNum;
