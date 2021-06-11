@@ -21,7 +21,7 @@ int Candidate() {
     while(pinCount[current] > 0){
         current = ++current % nFrames;
     }
-    int candidate = current+1;
+    int candidate = current+1;ZZZZ
     current = ++current % nFrames;
     return candidate;
 }
