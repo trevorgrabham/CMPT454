@@ -14,34 +14,23 @@ int nFrames;
 char action;
 int bufferNum;
 int candidate;
-queue<int> replacementQ;
+int current = 0;
 
 
 int Candidate() {
-    int candidate = replacementQ.front();
-    replacementQ.pop();
-    return candidate+1;
+    while(pinCount[current] > 0){
+        current = ++current % nFrames;
+    }
+    return current+1;
 }
 
 void Pin(int n){
-    int front;
-    queue<int> newQ;
-    while(!replacementQ.empty()){
-        front = replacementQ.front();
-        replacementQ.pop();
-        if(front != (n-1)){
-            newQ.push(front);
-        }
-    }
-    replacementQ = newQ;
     pinCount[n-1]++;
     return;
 }
 
 void Unpin(int n){
-    if(--pinCount[n-1] <= 0){
-        replacementQ.push(n-1);
-    }
+    pinCount[n-1]--;
     return;
 }
 
@@ -61,9 +50,9 @@ int main(){
     while(!ifile.eof()){
         ifile >> action;
         if(action == 'R'){
-            candidate = Candidate();
-            ofile << candidate << " ";
-            pinCount[candidate] = 1;
+            toBeReplaced = Candidate();
+            ofile << toBeReplaced << " ";
+            pinCount[toBeReplaced] = 1;
         } else if(action == 'U'){
             ifile >> bufferNum;
             Unpin(bufferNum);
