@@ -14,7 +14,7 @@ int nFrames;
 char action;
 int bufferNum;
 int candidate;
-int current = 0;
+int current = 4;
 
 
 int Candidate() {
