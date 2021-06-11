@@ -50,7 +50,7 @@ int main(){
     while(!ifile.eof()){
         ifile >> action;
         if(action == 'R'){
-            toBeReplaced = Candidate();
+            candidate = Candidate();
             ofile << toBeReplaced << " ";
             pinCount[toBeReplaced] = 1;
         } else if(action == 'U'){
