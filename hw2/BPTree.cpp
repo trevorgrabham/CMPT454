@@ -124,7 +124,7 @@ void BPTree::insert(int x) {
       int i = 0, j;
       while (x > virtualNode[i] && i < MAX)
         i++;
-      for (int j = MAX + 1; j > i; j--) {
+      for (int j = MAX + 1; j > i; j--) {               // isn't this supposed to be MAX, not MAX+1? Did we mean to go out of bounds with the array index?
         virtualNode[j] = virtualNode[j - 1];
       }
       virtualNode[i] = x;
