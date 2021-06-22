@@ -124,7 +124,7 @@ void BPTree::insert(int x) {
       int i = 0, j;
       while (x > virtualNode[i] && i < MAX)
         i++;
-      for (int j = MAX + 1; j > i; j--) {
+      for (int j = MAX; j > i; j--) {
         virtualNode[j] = virtualNode[j - 1];
       }
       virtualNode[i] = x;
