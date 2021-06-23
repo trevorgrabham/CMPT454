@@ -216,7 +216,93 @@ void BPTree::insertInternal(int x, Node *cursor, Node *child) {
 
 // Delete Operation
 void BPTree::deletes(int x) {
-    //TODO: Fill this part out!
+    // empty case
+    if(root == NULL){
+      return;
+    }
+    // find the proper leaf node
+    Node *cursor = root;
+    Node *parent;
+    int cursorI;
+    while (cursor->IS_LEAF == false) {
+      parent = cursor;
+      // select the proper pointer to continue further into the tree
+      for (int i = 0; i < cursor->size; i++) {
+        if (x < cursor->key[i]) {
+          cursor = cursor->ptr[i];
+          cursorI = i;
+          break;
+        }
+        if (i == cursor->size - 1) {
+          cursor = cursor->ptr[i + 1];
+          cursorI = i+1;
+          break;
+        }
+      }
+    }
+    // cursor is now the proper leaf node that x would be in
+    deleteInternal(parent, cursorI, x)
+}
+
+void BTree::deleteInternal(Node* parent, int cursorI, int x){
+  Node *leftSibling;
+  Node *rightSibling;
+  if(cursorI == 0){
+    leftSibling =  NULL;
+  } else {
+    leftSibling = parent->ptr[cursorI-1];
+  }
+  if(cursorI == parent->size){
+    rightSibling =  NULL;
+  } else {
+    rightSibling = parent->ptr[cursorI+1];
+  }
+  // search cursor for the value x
+      // i = -1
+      // for loop j=0;j<size;j++
+        // if found, i = j
+    // if i < 0, return
+    // else, check the size of cursor
+      // if size >= MAX/2 + 1 
+        // shift everything left 1
+        for(int j=i;j<cursor->size - 1;j++){
+          cursor->key[j] = cursor->key[j+1];
+        }
+        for(int j=i;j<cursor->size;j++){
+          cursor->ptr[j] = cursor->ptr[j+1];
+        }
+        cursor->size--;
+      // else check size of left sibling
+        // if leftSibling != NULL
+          // if leftSibling->size + cursor->size <= MAX
+            // combine them
+            for j=0;j<cursor->size;j++){
+              leftSibling->key[leftSibling->size+j] = cursor->key[j];
+              leftSibling->ptr[leftSibling->size+j] = cursor->ptr[j];
+            }
+            leftSibling->ptr[leftSibling->size+cursor->size] = cursor->ptr[cursor->size];
+            leftSibling->size += cursor->size;
+            // findParent of parent
+            // find parentI
+            // deleteinternal parents parent, parentI, parent->key[cursorI]
+            // return
+      // else check size of right sibling
+        // if rightSibling != NULL
+          // if rightSibling->size + cursor->size <= MAX
+            // combine them
+            for j=0;j<rightSibling->size;j++){
+              cursor->key[cursor->size+j] = rightSibling->key[j];
+              cursor->ptr[cursor->size+j] = rightSibling->ptr[j];
+            }
+            cursor->ptr[cursor->size+rightSibling->size] = rightSibling->ptr[rightSibling->size];
+            cursor->size += rightSibling->size;
+            // findParent of parent
+            // find parentI
+            // deleteinternal parents parent, parentI, parent->key[cursorI+1]
+            // return
+      // else move a value from the right side to the end of cursor, update the cursor size and take the ptr with it, and then left shift the rightsibling and update its size
+      // finally, update the parents key[cursorI+1] to the new value of rightsibling->key[0]
+      // return
 }
 
 // Find the parent
