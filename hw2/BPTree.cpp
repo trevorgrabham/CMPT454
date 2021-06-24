@@ -257,7 +257,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
 
     // else, check the size of cursor
       // if size >= MAX/2 + 1 
-  if(cursor->size >= ceil(MAX/2.0+1)){
+  if(cursor->size >= ceil(MAX/2.0)){
     cout << "\nJust deleting\tNode size is " << cursor->size << endl << endl;
     return;
   }
@@ -294,6 +294,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
         // if leftSibling != NULL
           // if leftSibling->size + cursor->size <= MAX
   if(leftSibling != NULL && (leftSibling->size + cursor->size <= MAX)){
+    cout << "\nCombining with left sibling\tleft size = " << leftSibling->size << "\tcursor size = " << cursor->size << endl << endl;
     // combine them
     for(int j=0;j<cursor->size;j++){
       leftSibling->key[leftSibling->size+j] = cursor->key[j];
@@ -301,7 +302,6 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     }
     leftSibling->ptr[leftSibling->size+cursor->size] = cursor->ptr[cursor->size];
     leftSibling->size += cursor->size;
-    parent->ptr[cursorI] = NULL;
     // findParent of parent
     Node* grandparent = findParent(root, parent);
     // find parentI
@@ -323,6 +323,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
         // if rightSibling != NULL
           // if rightSibling->size + cursor->size <= MAX
   if(rightSibling != NULL && (rightSibling->size + cursor->size <= MAX)){
+    cout << "\nCombining with right sibling\right size = " << leftSibling->size << "\tcursor size = " << cursor->size << endl << endl;
     // combine them
     for(int j=0;j<rightSibling->size;j++){
       cursor->key[cursor->size+j] = rightSibling->key[j];
@@ -330,7 +331,6 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     }
     cursor->ptr[cursor->size+rightSibling->size] = rightSibling->ptr[rightSibling->size];
     cursor->size += rightSibling->size;
-    parent->ptr[cursorI+1] = NULL;
     // findParent of parent
     Node* grandparent = findParent(root, parent);
     // find parentI
