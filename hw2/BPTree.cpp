@@ -306,9 +306,8 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     // findParent of parent
     Node* grandparent = findParent(root, parent);
         cout << 2 << endl;
-        if(grandparent == NULL){
-          cout << "fucking shit";
-        }
+        
+        cout << "\ngrandparent size = " << grandparent->size << endl << endl;
 
     // find parentI
     int parentI = 0;
