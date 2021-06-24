@@ -302,24 +302,22 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     }
     leftSibling->ptr[leftSibling->size+cursor->size] = cursor->ptr[cursor->size];
     leftSibling->size += cursor->size;
-    cout << 1 << endl;
     // findParent of parent
     Node* grandparent = findParent(root, parent);
-        cout << 2 << endl;
-        if(grandparent == NULL){
-          cout << "fucking shit";
-        }
-
+    if(grandparent == NULL){
+      if(parent != root){
+        grandparent = root;
+      }else{
+        return;
+      }
+    }
     // find parentI
     int parentI = 0;
-    // for(int j=0;j<grandparent->size;j++){
-    //       cout << 3 << endl;
-
-    //   if(grandparent->ptr[j] == parent){
-    //     parentI = j;
-    //   }
-    // }
-    cout << 4 << endl;
+    for(int j=0;j<grandparent->size+1;j++){
+      if(grandparent->ptr[j] == parent){
+        parentI = j;
+      }
+    }
     // deleteinternal parents parent, parentI, parent->key[cursorI]
     if(rightSibling){
       deleteInternal(grandparent, parentI, parent->key[cursorI]);
@@ -342,6 +340,13 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     cursor->size += rightSibling->size;
     // findParent of parent
     Node* grandparent = findParent(root, parent);
+    if(grandparent == NULL){
+      if(parent != root){
+        grandparent = root;
+      }else{
+        return;
+      }
+    }
     // find parentI
     int parentI = 0;
     for(int j=0;j<grandparent->size+1;j++){
