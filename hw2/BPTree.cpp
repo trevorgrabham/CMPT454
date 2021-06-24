@@ -243,18 +243,22 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
   if(i < 0){
     return;
   }
+
+  // delete it 
+
+  // shift everything left 1
+  for(int j=i;j<cursor->size - 1;j++){
+    cursor->key[j] = cursor->key[j+1];
+  }
+  for(int j=i;j<cursor->size;j++){
+    cursor->ptr[j] = cursor->ptr[j+1];
+  }
+  cursor->size--;
+  
     // else, check the size of cursor
       // if size >= MAX/2 + 1 
   if(cursor->size >= ceil(MAX/2.0+1)){
     cout << "\nJust deleting\tNode size is " << cursor->size << endl << endl;
-    // shift everything left 1
-    for(int j=i;j<cursor->size - 1;j++){
-      cursor->key[j] = cursor->key[j+1];
-    }
-    for(int j=i;j<cursor->size;j++){
-      cursor->ptr[j] = cursor->ptr[j+1];
-    }
-    cursor->size--;
     return;
   }
 
