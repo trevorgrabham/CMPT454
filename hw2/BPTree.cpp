@@ -216,7 +216,7 @@ void BPTree::insertInternal(int x, Node *cursor, Node *child) {
 }
 
 void BPTree::deleteInternal(Node* parent, int cursorI, int x){
-  cout << "\nLooking for " << x << " should be the " << cursorI << " child\n\n";
+  cout << "\nLooking for " << x << endl << endl;
   Node *leftSibling;
   Node *rightSibling;
   Node* cursor = parent->ptr[cursorI];
@@ -235,6 +235,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
   for(int j=0;j<parent->size;j++){
     if(parent->key[j] == x){
       i = j;
+      cout << "\nFound the value in the " << i << " slot\n\n";
     }
   }
       // if i < 0, return
