@@ -33,6 +33,7 @@ class Node {
 class BPTree {
   Node *root;
   void insertInternal(int, Node *, Node *);
+  void deleteInternal(Node*, int, int);
   Node *findParent(Node *, Node *);
 
   public:
