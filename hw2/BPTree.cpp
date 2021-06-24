@@ -424,6 +424,6 @@ int main() {
   node.insert(20);
   node.display(node.getRoot());
   cout << endl << endl;
-  node.deletes(15);
+  node.deletes(25);
   node.display(node.getRoot());
 }
