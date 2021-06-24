@@ -232,8 +232,8 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
   }
   // search cursor for the value x
   int i = -1;
-  for(int j=0;j<parent->size;j++){
-    if(parent->key[j] == x){
+  for(int j=0;j<cursor->size;j++){
+    if(cursor->key[j] == x){
       i = j;
       cout << "\nFound the value in the " << i << " slot\n\n";
     }
