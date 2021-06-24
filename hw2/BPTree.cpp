@@ -307,6 +307,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     if(grandparent == NULL){
       if(parent != root){
         grandparent = root;
+        cout << "\nReached the root\n\n";
       }else{
         return;
       }
