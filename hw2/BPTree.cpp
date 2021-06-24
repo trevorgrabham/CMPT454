@@ -245,6 +245,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     // else, check the size of cursor
       // if size >= MAX/2 + 1 
   if(cursor->size >= (MAX/2)+1){
+    cout << "\nJust deleting\n\n";
     // shift everything left 1
     for(int j=i;j<cursor->size - 1;j++){
       cursor->key[j] = cursor->key[j+1];
@@ -255,7 +256,9 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     cursor->size--;
     return;
   }
+
   if(rightSibling != NULL && rightSibling->size > MAX/2){
+    cout << "\nRedistributing from right sibling\n\n";
     // redistribute from rightSibling
     cursor->key[cursor->size-1] = rightSibling->key[0];
     cursor->ptr[cursor->size] = rightSibling->ptr[0];
@@ -268,7 +271,9 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     cursor->size++;
     return;
   }
+
   if(leftSibling != NULL && leftSibling->size > MAX/2){
+    cout << "\nRedistributing from left sibling\n\n";
     cursor->ptr[cursor->size+1] = cursor->ptr[cursor->size];
     for(int j=cursor->size;j>0;j--){
       cursor->key[j] = cursor->key[j-1];
