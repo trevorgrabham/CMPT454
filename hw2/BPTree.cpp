@@ -423,4 +423,5 @@ int main() {
   node.display(node.getRoot());
 
   node.deletes(15);
+  node.display(node.getRoot());
 }
