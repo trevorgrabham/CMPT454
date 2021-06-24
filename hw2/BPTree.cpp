@@ -245,7 +245,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     // else, check the size of cursor
       // if size >= MAX/2 + 1 
   if(cursor->size >= (MAX/2)+1){
-    cout << "\nJust deleting\n\n";
+    cout << "\nJust deleting\tNode size is " << cursor->size << endl << endl;
     // shift everything left 1
     for(int j=i;j<cursor->size - 1;j++){
       cursor->key[j] = cursor->key[j+1];
