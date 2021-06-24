@@ -15,6 +15,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <math.h>
 using namespace std;
 int MAX = 3;
 
@@ -244,7 +245,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
   }
     // else, check the size of cursor
       // if size >= MAX/2 + 1 
-  if(cursor->size >= MAX/2.0+1){
+  if(cursor->size >= ceil(MAX/2.0+1)){
     cout << "\nJust deleting\tNode size is " << cursor->size << endl << endl;
     // shift everything left 1
     for(int j=i;j<cursor->size - 1;j++){
@@ -257,7 +258,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     return;
   }
 
-  if(rightSibling != NULL && rightSibling->size > MAX/2.0){
+  if(rightSibling != NULL && rightSibling->size > ceil(MAX/2.0)){
     cout << "\nRedistributing from right sibling\n\n";
     // redistribute from rightSibling
     cursor->key[cursor->size-1] = rightSibling->key[0];
@@ -272,7 +273,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     return;
   }
 
-  if(leftSibling != NULL && leftSibling->size > MAX/2.0){
+  if(leftSibling != NULL && leftSibling->size > ceil(MAX/2.0)){
     cout << "\nRedistributing from left sibling\n\n";
     cursor->ptr[cursor->size+1] = cursor->ptr[cursor->size];
     for(int j=cursor->size;j>0;j--){
