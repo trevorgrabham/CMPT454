@@ -322,7 +322,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     // findParent of parent
     Node* grandparent = findParent(root, parent);
     // find parentI
-    parentI = 0;
+    int parentI = 0;
     for(int j=0;j<grandparent->size+1;j++){
       if(grandparent->ptr[j] == parent){
         parentI = j;
