@@ -214,36 +214,6 @@ void BPTree::insertInternal(int x, Node *cursor, Node *child) {
   }
 }
 
-// Delete Operation
-void BPTree::deletes(int x) {
-    // empty case
-    if(root == NULL){
-      return;
-    }
-    // find the proper leaf node
-    Node *cursor = root;
-    Node *parent;
-    int cursorI;
-    while (cursor->IS_LEAF == false) {
-      parent = cursor;
-      // select the proper pointer to continue further into the tree
-      for (int i = 0; i < cursor->size; i++) {
-        if (x < cursor->key[i]) {
-          cursor = cursor->ptr[i];
-          cursorI = i;
-          break;
-        }
-        if (i == cursor->size - 1) {
-          cursor = cursor->ptr[i + 1];
-          cursorI = i+1;
-          break;
-        }
-      }
-    }
-    // cursor is now the proper leaf node that x would be in
-    deleteInternal(parent, cursorI, x);
-}
-
 void BPTree::deleteInternal(Node* parent, int cursorI, int x){
   Node *leftSibling;
   Node *rightSibling;
@@ -365,6 +335,39 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
       // finally, update the parents key[cursorI+1] to the new value of rightsibling->key[0]
       // return
 }
+
+
+// Delete Operation
+void BPTree::deletes(int x) {
+    // empty case
+    if(root == NULL){
+      return;
+    }
+    // find the proper leaf node
+    Node *cursor = root;
+    Node *parent;
+    int cursorI;
+    while (cursor->IS_LEAF == false) {
+      parent = cursor;
+      // select the proper pointer to continue further into the tree
+      for (int i = 0; i < cursor->size; i++) {
+        if (x < cursor->key[i]) {
+          cursor = cursor->ptr[i];
+          cursorI = i;
+          break;
+        }
+        if (i == cursor->size - 1) {
+          cursor = cursor->ptr[i + 1];
+          cursorI = i+1;
+          break;
+        }
+      }
+    }
+    // cursor is now the proper leaf node that x would be in
+    deleteInternal(parent, cursorI, x);
+}
+
+
 
 // Find the parent
 Node *BPTree::findParent(Node *cursor, Node *child) {
