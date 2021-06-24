@@ -217,7 +217,6 @@ void BPTree::insertInternal(int x, Node *cursor, Node *child) {
 }
 
 void BPTree::deleteInternal(Node* parent, int cursorI, int x){
-  cout << "\nLooking for " << x << endl << endl;
   Node *leftSibling;
   Node *rightSibling;
   Node* cursor = parent->ptr[cursorI];
@@ -236,7 +235,6 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
   for(int j=0;j<cursor->size;j++){
     if(cursor->key[j] == x){
       i = j;
-      cout << "\nFound the value in the " << i << " slot\n\n";
     }
   }
       // if i < 0, return
@@ -258,12 +256,10 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     // else, check the size of cursor
       // if size >= MAX/2 + 1 
   if(cursor->size >= ceil(MAX/2.0)){
-    cout << "\nJust deleting\tNode size is " << cursor->size << endl << endl;
     return;
   }
 
   if(rightSibling != NULL && rightSibling->size > ceil(MAX/2.0)){
-    cout << "\nRedistributing from right sibling\n\n";
     // redistribute from rightSibling
     cursor->key[cursor->size-1] = rightSibling->key[0];
     cursor->ptr[cursor->size] = rightSibling->ptr[0];
@@ -278,7 +274,6 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
   }
 
   if(leftSibling != NULL && leftSibling->size > ceil(MAX/2.0)){
-    cout << "\nRedistributing from left sibling\n\n";
     cursor->ptr[cursor->size+1] = cursor->ptr[cursor->size];
     for(int j=cursor->size;j>0;j--){
       cursor->key[j] = cursor->key[j-1];
@@ -294,7 +289,6 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
         // if leftSibling != NULL
           // if leftSibling->size + cursor->size <= MAX
   if(leftSibling != NULL && (leftSibling->size + cursor->size <= MAX)){
-    cout << "\nCombining with left sibling\tleft size = " << leftSibling->size << "\tcursor size = " << cursor->size << endl << endl;
     // combine them
     for(int j=0;j<cursor->size;j++){
       leftSibling->key[leftSibling->size+j] = cursor->key[j];
@@ -307,7 +301,6 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     if(grandparent == NULL){
       if(parent != root){
         grandparent = root;
-        cout << "\nReached the root\n\n";
       }else{
         return;
       }
@@ -317,7 +310,6 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     for(int j=0;j<grandparent->size+1;j++){
       if(grandparent->ptr[j] == parent){
         parentI = j;
-        cout << "\nparentI = " << j << endl << endl;
       }
     }
     // deleteinternal parents parent, parentI, parent->key[cursorI]
@@ -332,7 +324,6 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
         // if rightSibling != NULL
           // if rightSibling->size + cursor->size <= MAX
   if(rightSibling != NULL && (rightSibling->size + cursor->size <= MAX)){
-    cout << "\nCombining with right sibling\right size = " << leftSibling->size << "\tcursor size = " << cursor->size << endl << endl;
     // combine them
     for(int j=0;j<rightSibling->size;j++){
       cursor->key[cursor->size+j] = rightSibling->key[j];
@@ -448,17 +439,5 @@ int main() {
   node.insert(40);
   node.insert(30);
   node.insert(20);
-  node.insert(1);
-  node.insert(2);
-  node.insert(3);
-  node.insert(4);
-  node.insert(6);
-  node.insert(7);
-  node.insert(8);
-  node.insert(9);
-  node.insert(10);
-  node.display(node.getRoot());
-  cout << endl << endl;
-  node.deletes(40);
   node.display(node.getRoot());
 }
