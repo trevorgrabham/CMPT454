@@ -422,5 +422,5 @@ int main() {
   node.insert(20);
   node.display(node.getRoot());
 
-  node.search(15);
+  node.deletes(15);
 }
