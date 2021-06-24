@@ -316,6 +316,7 @@ void BPTree::deleteInternal(Node* parent, int cursorI, int x){
     for(int j=0;j<grandparent->size+1;j++){
       if(grandparent->ptr[j] == parent){
         parentI = j;
+        cout << "\nparentI = " << j << endl << endl;
       }
     }
     // deleteinternal parents parent, parentI, parent->key[cursorI]
