@@ -216,6 +216,7 @@ void BPTree::insertInternal(int x, Node *cursor, Node *child) {
 }
 
 void BPTree::deleteInternal(Node* parent, int cursorI, int x){
+  cout << "\nLooking for " << x << " should be the " << cursorI << " child\n\n";
   Node *leftSibling;
   Node *rightSibling;
   Node* cursor = parent->ptr[cursorI];
@@ -421,7 +422,7 @@ int main() {
   node.insert(30);
   node.insert(20);
   node.display(node.getRoot());
-  cout << endl;endl;
+  cout << endl << endl;
   node.deletes(15);
   node.display(node.getRoot());
 }
