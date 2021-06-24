@@ -244,7 +244,7 @@ void BPTree::deletes(int x) {
     deleteInternal(parent, cursorI, x);
 }
 
-void BTree::deleteInternal(Node* parent, int cursorI, int x){
+void BPTree::deleteInternal(Node* parent, int cursorI, int x){
   Node *leftSibling;
   Node *rightSibling;
   Node* cursor = parent->ptr[cursorI];
