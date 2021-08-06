@@ -34,8 +34,7 @@ void Graph::reachableFrom(unsigned source, unsigned numSteps, set<unsigned>* rea
 }
 
 vector<unsigned>* Graph::hasCycle(){
-    vector<unsigned>* res;
-    *res = vector<unsigned>();
+    vector<unsigned>* res = new vector<unsigned>();
     vector<set<unsigned>> reachable = vector<set<unsigned>>(this->size, set<unsigned>());
     for(unsigned i = 0;i<this->size;i++){       // for each vertex
         this->reachableFrom(i+1, 0, &reachable[i]);
