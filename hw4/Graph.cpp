@@ -37,10 +37,10 @@ vector<unsigned>* Graph::hasCycle(){
     vector<unsigned>* res = new vector<unsigned>();
     vector<set<unsigned>> reachable = vector<set<unsigned>>(this->size, set<unsigned>());
     for(unsigned i = 0;i<this->size;i++){       // for each vertex
-        this->reachableFrom(i+1, 0, &reachable[i]);
+        this->reachableFrom(i, 0, &reachable[i]);
     }
     for(unsigned i = 0;i<this->size;i++){       // for each vertex
-        if(reachable[i].count(i) == 0){
+        if(reachable[i].count(i) != 0){
             res->push_back(i+1);
         }
     }
