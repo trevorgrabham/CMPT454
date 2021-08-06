@@ -75,6 +75,7 @@ int main(){
     g.addEdge(5,6);
     g.addEdge(6,5);
     g.removeEdge(2,3);
+    g.addEdge(2,1);
     vector<unsigned>* cyclicVertices = g.hasCycle();
     cout << "Cyclic vertices include: ";
     for(auto v: *cyclicVertices){
