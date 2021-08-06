@@ -11,6 +11,7 @@ class Graph {
 public:
     Graph(unsigned n);
     void addEdge(unsigned s, unsigned d);
+    void removeEdge(unsigned s, unsigned d);
     vector<unsigned>* hasCycle();
 };
 
@@ -21,6 +22,19 @@ Graph::Graph(unsigned n){
 
 void Graph::addEdge(unsigned s, unsigned d) {
     this->adjacencyList[s-1].push_back(d-1);
+}
+
+void Graph::removeEdge(unsigned s, unsigned d){
+    unsigned i = 0;
+    while(this->adjacencyList[s-1][i] != d-1){
+        i++;
+    }
+    if(i == 0){
+        this->adjacencyList[s-1].erase(this->adjacencyList[s-1].begin()+i-1);
+    } else {
+        this->adjacencyList[s-1].erase(this->adjacencyList[s-1].begin());
+    }
+    
 }
 
 void Graph::reachableFrom(unsigned source, unsigned numSteps, set<unsigned>* reachable){
@@ -60,6 +74,7 @@ int main(){
     g.addEdge(4,3);
     g.addEdge(5,6);
     g.addEdge(6,5);
+    g.removeEdge(2,3);
     vector<unsigned>* cyclicVertices = g.hasCycle();
     cout << "Cyclic vertices include: ";
     for(auto v: *cyclicVertices){
